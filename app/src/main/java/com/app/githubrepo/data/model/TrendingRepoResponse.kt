@@ -5,9 +5,10 @@ import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
 data class TrendingRepoResponse(
-    val status: String,
+    val isLoading: Boolean=false,
     val items: @RawValue
-    List<Items>,val errorResponse: ErrorResponse){
+    List<Items>, val errorResponse: ErrorResponse?
+) {
 
     @Parcelize
     data class Items(

@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.githubrepo.R
-import com.app.githubrepo.data.model.ResponseStatus
 import com.app.githubrepo.data.model.TrendingRepoResponse
 import com.app.githubrepo.ui.adapters.TrendingRepoAdapter
 import com.app.githubrepo.ui.interfaces.FragmentCallbackListener
@@ -48,6 +47,12 @@ class RepoListFragment : Fragment() {
         getTrendingRepo()
         setAdapterToRecyclerView()
         setSwipeRefreshListener()
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        retainInstance=true
     }
 
     private fun setSwipeRefreshListener() {
@@ -103,30 +108,36 @@ class RepoListFragment : Fragment() {
         viewModel.getTrendingRepo(Constants.TRENDING_REPO, pageNumber)
             .observe(activity!!, Observer {
                 try {
-                    when (it) {
-                        is ResponseStatus.Success -> {
-
+                    if (it.isLoading) {
+                        if (!isPagination && !srl_refresh.isRefreshing) {
+                            pb_progress.visibility = View.VISIBLE
+                        }
+                    } else {
+                        if (it?.errorResponse == null) {
                             if (!isPagination) {
                                 repoList.clear()
                             }
-                            repoList.addAll(it.value.items)
+
+                            repoList.addAll(it.items)
                             mAdapter.notifyDataSetChanged()
                             if (pageNumber == 1) {
                                 checkListSize()
                             }
+                        } else {
+                            Util.showToast(activity!!, it.errorResponse.message)
                         }
-                        is ResponseStatus.Error -> {
-                            Util.showToast(activity!!, it.value.errorResponse.message)
-                        }
+                        pb_progress.visibility = View.GONE
                     }
+                    if (srl_refresh.isRefreshing) {
+                        srl_refresh.isRefreshing = false
+                    }
+                    isPagination = false
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }
-                if (srl_refresh.isRefreshing) {
-                    srl_refresh.isRefreshing = false
-                }
-                isPagination = false
+
             })
+
     }
 
     /*
@@ -138,12 +149,12 @@ class RepoListFragment : Fragment() {
 
     private fun checkListSize() {
         if (repoList.size > 0) {
-            tv_no_list.visibility = View.VISIBLE
-            rv_repo_list.visibility = View.GONE
+            tv_no_list.visibility = View.GONE
+            rv_repo_list.visibility = View.VISIBLE
 
         } else {
-            tv_no_list.visibility = View.VISIBLE
-            rv_repo_list.visibility = View.GONE
+            tv_no_list.visibility = View.GONE
+            rv_repo_list.visibility = View.VISIBLE
         }
     }
 

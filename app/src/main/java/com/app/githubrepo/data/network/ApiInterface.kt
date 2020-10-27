@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface ApiInterface {
     @GET("search/repositories")
-    suspend fun getTrendingRepo(@Query("q") q: String, @Query("page") page: Int): ResponseStatus<TrendingRepoResponse>
+    suspend fun getTrendingRepo(@Query("q") q: String, @Query("page") page: Int):TrendingRepoResponse
 }

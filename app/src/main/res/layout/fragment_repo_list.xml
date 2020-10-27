@@ -28,7 +28,7 @@
             android:visibility="gone" />
 
         <ProgressBar
-            android:id="@+id/iv_progress"
+            android:id="@+id/pb_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
