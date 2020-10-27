@@ -4,10 +4,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_lable_name">Name</string>
-    <string name="text_label_author">Author</string>
     <string name="text_label_description">Description</string>
     <string name="text_lablel_language">Language</string>
-    <string name="text_label_stars">Stars</string>
+    <string name="text_label_score">Score</string>
     <string name="text_label_forks">Forks</string>
-    <string name="text_label_built_by">Built By</string>
+    <string name="text_score_fork">Score = %1$s   Forks = %2$s</string>
+    <string name="text_no_detail_available">No Detail Available</string>
+    <string name="text_no_repository_available">No Repository Available</string>
+    <string name="text_owner_label">Owner</string>
+    <string name="text_label_project_link">Project Link</string>
+    <string name="text_title_repo_list">Github Trending Repositories</string>
+    <string name="text_title_repo_detail">Repository Detail</string>
+    <string name="error_no_internet">No Internet connection</string>
+    <string name="error_something_went_wrong">Something went wrong</string>
 </resources>

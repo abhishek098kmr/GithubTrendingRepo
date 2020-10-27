@@ -1,6 +1,8 @@
 package com.app.githubrepo.data.repository
 
-import android.app.Application
+import com.app.githubrepo.data.network.RetrofitBuilder
 
-class MainRepository(application: Application) {
+class MainRepository {
+    suspend fun getTrendingRepo(q:String,page:Int) = RetrofitBuilder.apiInterface.getTrendingRepo(q,page)
+
 }

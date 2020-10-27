@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+<!--
+dimen size
+-->
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_15">15dp</dimen>
     <dimen name="dimen_50">50dp</dimen>
 
-    <dimen name="dimen_10">10dp</dimen>
 
+<!--
+    text sizes
+-->
     <dimen name="text_size_13">13sp</dimen>
     <dimen name="text_size_15">15sp</dimen>
-    <dimen name="dimen_15">15dp</dimen>
+    <dimen name="text_size_17">17sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+
 </resources>
