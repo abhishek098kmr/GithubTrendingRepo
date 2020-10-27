@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">GithubRepo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_lable_name">Name</string>
+    <string name="text_label_author">Author</string>
+    <string name="text_label_description">Description</string>
+    <string name="text_lablel_language">Language</string>
+    <string name="text_label_stars">Stars</string>
+    <string name="text_label_forks">Forks</string>
+    <string name="text_label_built_by">Built By</string>
+</resources>
