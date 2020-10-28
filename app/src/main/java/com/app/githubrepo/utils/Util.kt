@@ -45,9 +45,9 @@ object Util {
     }
 
     fun showToast(context: Context, message: String?) {
-        if(message?.isNotEmpty()!!) {
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-        }else{
+        if (message?.isNotEmpty()!!) {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        } else {
             Toast.makeText(
                 context,
                 context.getString(R.string.error_something_went_wrong),

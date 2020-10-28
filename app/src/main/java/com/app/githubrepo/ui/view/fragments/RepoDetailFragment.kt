@@ -115,11 +115,11 @@ class RepoDetailFragment : Fragment() {
             tv_owner_name.text = repoDetail?.owner?.login
             Glide.with(activity!!).load(repoDetail?.owner?.avatar_url).circleCrop().into(iv_owner_image)
 
-            tv_owner_name.setOnClickListener {
+            ll_owner_info.setOnClickListener {
                 Util.openUrlToWebView(repoDetail?.owner?.html_url,activity!!)
             }
         } ?: let {
-            ll_forks.visibility = View.GONE
+            ll_owner.visibility = View.GONE
         }
 
 

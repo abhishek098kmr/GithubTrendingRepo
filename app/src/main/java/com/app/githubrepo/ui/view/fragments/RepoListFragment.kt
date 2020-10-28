@@ -50,10 +50,10 @@ class RepoListFragment : Fragment() {
     }
 
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+   /* override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        retainInstance=true
-    }
+        retainInstance = true
+    }*/
 
     private fun setSwipeRefreshListener() {
         srl_refresh.setOnRefreshListener {
@@ -69,7 +69,7 @@ class RepoListFragment : Fragment() {
         mAdapter =
             TrendingRepoAdapter(activity!!, repoList, object : RecyclerViewItemClickListener {
                 override fun onItemClickListener(position: Int) {
-                    callBackListener?.openRepoDetailFragment(repoList[position])
+                    callBackListener?.openFragment(RepoDetailFragment.newInstance(repoList[position]))
                 }
 
             })
@@ -84,7 +84,7 @@ class RepoListFragment : Fragment() {
                     val totalItemCount: Int = layoutManager.itemCount
                     val firstVisibleItemPosition: Int =
                         layoutManager.findFirstVisibleItemPosition()
-                    if (!isPagination && repoList.size < 1000 && !srl_refresh.isRefreshing) {
+                    if (!isPagination && repoList.size < Constants.TOTAL_REPO_COUNT && !srl_refresh.isRefreshing) {
                         if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
                             isPagination = true
                             pageNumber++
@@ -127,11 +127,11 @@ class RepoListFragment : Fragment() {
                             Util.showToast(activity!!, it.errorResponse.message)
                         }
                         pb_progress.visibility = View.GONE
+                        if (srl_refresh.isRefreshing) {
+                            srl_refresh.isRefreshing = false
+                        }
+                        isPagination = false
                     }
-                    if (srl_refresh.isRefreshing) {
-                        srl_refresh.isRefreshing = false
-                    }
-                    isPagination = false
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                 }

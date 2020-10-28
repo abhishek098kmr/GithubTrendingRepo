@@ -16,6 +16,6 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        MyApplication.sInstance = this
+        sInstance = this
     }
 }

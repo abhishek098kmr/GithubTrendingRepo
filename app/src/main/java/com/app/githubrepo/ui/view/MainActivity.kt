@@ -5,7 +5,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.app.githubrepo.R
-import com.app.githubrepo.data.model.TrendingRepoResponse
 import com.app.githubrepo.ui.interfaces.FragmentCallbackListener
 import com.app.githubrepo.ui.view.fragments.RepoDetailFragment
 import com.app.githubrepo.ui.view.fragments.RepoListFragment
@@ -16,34 +15,20 @@ class MainActivity : AppCompatActivity(), FragmentCallbackListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        openRepoListFragment()
-    }
-
-
-    /*
-    *
-    * method to open repository list fragment to show trending repositories
-    *
-    * */
-
-    private fun openRepoListFragment() {
-        supportFragmentManager.beginTransaction().replace(R.id.fl_container, RepoListFragment())
-            .commit()
-        addTitleToToolbar(getString(R.string.text_title_repo_list), false)
+        openFragment(RepoListFragment())
     }
 
 
     /*
   *
-  * method to open repository detail fragment to show detail of a particular repository
+  * method to open fragment to show detail of a particular repository
   *
   * */
 
-    override fun openRepoDetailFragment(items: TrendingRepoResponse.Items) {
-        val repoDetailFragment = RepoDetailFragment.newInstance(items)
+    override fun openFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fl_container, repoDetailFragment).addToBackStack(null).commit()
-        addTitleToToolbar(getString(R.string.text_title_repo_detail), true)
+            .add(R.id.fl_container, fragment).addToBackStack(null).commit()
+        checkForTitle(fragment)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -63,7 +48,7 @@ class MainActivity : AppCompatActivity(), FragmentCallbackListener {
         val fragment = supportFragmentManager.findFragmentById(R.id.fl_container)
         if (fragment is RepoDetailFragment) {
             supportFragmentManager.popBackStackImmediate()
-            checkForTitle()
+            checkForTitle(supportFragmentManager.findFragmentById(R.id.fl_container)!!)
         } else {
             finish()
         }
@@ -75,8 +60,7 @@ class MainActivity : AppCompatActivity(), FragmentCallbackListener {
     *
     * */
 
-    private fun checkForTitle() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.fl_container)
+    private fun checkForTitle(fragment: Fragment) {
         if (fragment is RepoListFragment) {
             addTitleToToolbar(getString(R.string.text_title_repo_list), false)
         } else if (fragment is RepoDetailFragment) {
@@ -91,7 +75,7 @@ class MainActivity : AppCompatActivity(), FragmentCallbackListener {
    *
    * */
 
-    override fun addTitleToToolbar(title: String, isHomeButtonEnabled: Boolean) {
+    private fun addTitleToToolbar(title: String, isHomeButtonEnabled: Boolean) {
         toolbar.title = title
         toolbar.setNavigationIcon(R.drawable.ic_back_white)
         setSupportActionBar(toolbar)

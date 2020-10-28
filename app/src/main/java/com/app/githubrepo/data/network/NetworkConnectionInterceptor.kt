@@ -1,6 +1,5 @@
 package com.app.githubrepo.data.network
 
-import android.accounts.NetworkErrorException
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -12,7 +11,7 @@ import okhttp3.Response
 import java.io.IOException
 
 
-class NetworkConnectionInterceptor(private val context: Context) :Interceptor {
+class NetworkConnectionInterceptor(private val context: Context) : Interceptor {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun intercept(chain: Interceptor.Chain): Response? {
         if (!Util.isInternetConnection(context)) {

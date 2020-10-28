@@ -183,6 +183,7 @@
                     android:textSize="@dimen/text_size_15" />
 
                 <LinearLayout
+                    android:id="@+id/ll_owner_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"

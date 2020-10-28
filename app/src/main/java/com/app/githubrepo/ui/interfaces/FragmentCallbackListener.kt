@@ -1,8 +1,7 @@
 package com.app.githubrepo.ui.interfaces
 
-import com.app.githubrepo.data.model.TrendingRepoResponse
+import androidx.fragment.app.Fragment
 
 interface FragmentCallbackListener {
-    fun openRepoDetailFragment(items: TrendingRepoResponse.Items)
-    fun addTitleToToolbar(title: String, isHomeButtonEnabled: Boolean)
+    fun openFragment(fragment: Fragment)
 }
